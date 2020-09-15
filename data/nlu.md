@@ -22,35 +22,39 @@
 ## intent:deny
 - no
 - never
-- I don't think so
-- don't like that
-- no way
-- not really
+- dont
+- não
+- cancela
 
-## intent:mood_great
-- perfect
-- very good
-- great
-- amazing
-- wonderful
-- I am feeling very good
-- I am great
-- I'm good
+## intent:inform_name
+- sou (Igor)(name)
+- sou [Igor](name) [Gadelha](surname)
+- me chamo [claudio](name)
+- me chamo [claudio](name) [santos](surname)
+- [claudio](name) [santos](surname)
+- [celso](name)
+- [bruno](name)
+- meu nome é [bruno](name)
+- [Igor](name) [Gadelha](surname)
 
-## intent:mood_unhappy
-- sad
-- very sad
-- unhappy
-- bad
-- very bad
-- awful
-- terrible
-- not very good
-- extremely sad
-- so sad
+## intent:order
+- quero um café
+- quero um café [pequeno]({coffe_size})
+- quero um café [médio]({coffe_size})
+- quero um café [grande]({coffe_size})
 
-## intent:bot_challenge
-- are you a bot?
-- are you a human?
-- am I talking to a bot?
-- am I talking to a human?
+## intent:inform_email
+- [igor@gmail.com](email)
+- [celso@hotmail.com.br](email)
+- [bruno@comercio.br](email)
+
+## intent:inform_cpf
+- [999.999.999-99](cpf)
+- [333.222.111-23](cpf)
+- [123.223.098-35](cpf)
+
+## regex:cpf
+- /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/
+
+## regex:email
+- [^@]+@[^@]+\.[^@]+
