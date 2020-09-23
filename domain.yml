@@ -1,3 +1,13 @@
+---
+actions:
+  - action_order
+entities:
+  - coffe_size
+  - cpf
+  - email
+forms:
+  - order_form
+  - user_form
 intents:
   - greet
   - goodbye
@@ -8,25 +18,85 @@ intents:
   - bot_challenge
 
 responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
+  utter_ask_cpf:
+    - text: qual o seu cpf?
+  utter_ask_email:
+    - text: qual o seu email?
+  utter_ask_name:
+    - text: qual o seu nome?
+  utter_ask_coffe_size:
+    - text: qual o tamanho de café você deseja escolher?
+      buttons:
+        - payload: '/choose{"coffe_size": "small"}'
+          title: Pequeno
+        - payload: '/choose{"coffe_size": "medium"}'
+          title: Médio
+        - payload: '/choose{"coffe_size": "large"}'
+          title: Grande
+  utter_get_user_info:
+    - text: 'Preciso de algumas informações suas para realizar seu pedido, tudo bem?'
+      buttons:
+        - payload: /affirm
+          title: Sim
+        - payload: /deny
+          title: Não
   utter_goodbye:
-  - text: "Bye"
-
+    - text: 'Ok. Bye, bye! :)'
+    - text: 'Ok. até a próxima! :)'
+  utter_greet:
+    - text: 'Olá, eu sou o bot de pedidos do PPayCoffe!'
+  utter_greet_user_auth:
+    - text: 'Olá [name], eu sou o bot de pedidos do PPayCoffe!'
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
+    - text: 'I am a bot, powered by Rasa.'
+  utter_order_coffe:
+    - text: '{name}, gostaria de fazer o seu pedido?'
+      buttons:
+        - payload: /affirm
+          title: sim
+        - payload: /deny
+          title: não
+  utter_order_resume:
+    - buttons:
+        - payload: /affirm
+          title: sim
+        - payload: /deny
+          title: não
+      text: >-
+        você escolheu um café {coffer_size}, fica no valor de {coffer_price},
+        posso confirmar seu pedido?
+  utter_thanks:
+    - text: Obrigado por realizar seu pedido conosco!
+  utter_ticket:
+    - text: 'O número do seu pedido é {order_number}'
+  utter_ticket_error:
+    - text: Não foi possível criar seu ticket.
+  utter_wrong_cpf:
+    - text: ops! Parece que você informou um cpf inválido.
+  utter_wrong_email:
+    - text: ops! Parece que você informou um email inválido.
+  utter_wrong_name:
+    - text: ops! Parece que você informou um nome inválido.
+  utter_wrong_coffe_size:
+    - text: ops! Parece que você informou um tamanho inválido.
 session_config:
   session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+slots:
+  coffe_size:
+    type: categorical
+    values:
+      - small
+      - medium
+      - large
+      - __other__
+  cpf:
+    type: text
+  email:
+    type: text
+  is_authenticated:
+    initial_value: false
+    type: list
+  name:
+    type: float
+  requested_slot:
+    type: unfeaturized
